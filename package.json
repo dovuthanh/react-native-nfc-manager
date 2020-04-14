@@ -1,0 +1,49 @@
+{
+  "name": "react-native-nfc-manager",
+  "version": "2.1.6",
+  "description": "A NFC module for react native.",
+  "main": "NfcManager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whitedogg13/react-native-nfc-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/whitedogg13/react-native-nfc-manager/issues"
+  },
+  "keywords": [
+    "react-native",
+    "android",
+    "ios",
+    "nfc"
+  ],
+  "files": [
+    "ByteParser.js",
+    "NfcManager.js",
+    "NativeNfcManager.js",
+    "NdefParser.js",
+    "ndef-lib",
+    "index.d.ts",
+    "android",
+    "ios",
+    "react-native-nfc-manager.podspec",
+    "example"
+  ],
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Richie",
+    "url": "https://github.com/whitedogg13"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
