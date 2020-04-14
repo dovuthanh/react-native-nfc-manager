@@ -559,7 +559,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publickKey callback: (n
         if (sessionEx != nil) {
             if (sessionEx.connectedTag) {
                 id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
-                NSData *data = [self arrayToData:bytes];
+                NSData *data = [NSData dataWithHexString:@"3C00"];
                 NSLog(@"input bytes: %@", getHexString(data));
                 if (mifareTag) {
                     [mifareTag sendMiFareCommand:data
