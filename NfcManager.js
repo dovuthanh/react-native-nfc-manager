@@ -18,6 +18,8 @@ const NfcEvents = {
   DiscoverTag: 'NfcManagerDiscoverTag',
   SessionClosed: 'NfcManagerSessionClosed',
   StateChanged: 'NfcManagerStateChanged',
+  OriginalChecked: 'NfcOriginalChecked',
+  OriginalCheckError: 'NfcOriginalCheckError'
 }
 
 const NfcTech = {
@@ -337,6 +339,8 @@ class NfcManager {
   // -------------------------------------
   sendMifareCommandIOS = (bytes) => callNative('sendMifareCommand', [bytes]);
 
+  verifyOriginalCheckNtag215 = (publicKey, password, packString) => callNative('verifyOriginalCheckNtag215', [publicKey, password, packString]);
+
   // -------------------------------------
   // (iOS) NfcTech.Iso15693IOS API
   // -------------------------------------
@@ -396,6 +400,20 @@ class NfcManager {
         NfcEvents.StateChanged, this._onStateChangedAndroid
       );
     }
+  }
+
+  _onOriginalChecked = tag => {
+      const callback = this._clientListeners[NfcEvents.OriginalChecked];
+      if (callback) {
+          callback(tag);
+      }
+  }
+
+  _onOriginalCheckError = tag => {
+      const callback = this._clientListeners[NfcEvents.OriginalCheckError];
+      if (callback) {
+          callback(tag);
+      }
   }
 
   _onDiscoverTag = tag => {

@@ -553,7 +553,7 @@ RCT_EXPORT_METHOD(sendMifareCommand:(NSArray *)bytes callback: (nonnull RCTRespo
     }
 }
 
-RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publickKey callback: (nonnull RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)password :(NSString *)packString callback: (nonnull RCTResponseSenderBlock)callback)
 {
     if (@available(iOS 13.0, *)) {
         if (sessionEx != nil) {
@@ -575,7 +575,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publickKey callback: (n
                             NSData *encodedCorrectSignature = derEncodeSignature(response);
                             BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
                             NSLog(@"    Verified: %@", valid ? @"YES": @"NO");
-                            callback(@[[NSNull null],  valid ? @"YES": @"NO")]);
+                            callback(@[[NSNull null],  valid ? @"YES": @"NO"]);
                         }
                     }];
                     return;

@@ -36,6 +36,8 @@ import android.os.Bundle;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 class NfcManager extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
@@ -998,6 +1000,91 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                         nfcAdapter.disableForegroundDispatch(currentActivity);
                     }
                 }
+            } catch (IllegalStateException | NullPointerException e) {
+                Log.w(LOG_TAG, "Illegal State Exception starting NFC. Assuming application is terminating.");
+            }
+        }
+    }
+
+    @ReactMethod
+    private void verifyOriginalCheckNtag215(final String publicKey, final String password, final String packString) {
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        Activity currentActivity = getCurrentActivity();
+        final NfcManager manager = this;
+        if (nfcAdapter != null && currentActivity != null && !currentActivity.isFinishing()) {
+            try {
+                if (publicKey.isEmpty() || password.isEmpty() || packString.isEmpty()) {
+                    sendEvent("NfcOriginalCheckError", null);
+                }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                    throw new RuntimeException("minSdkVersion must be Honeycomb (19) or later.");
+                }
+                Log.i(LOG_TAG, "enableReaderMode");
+                Bundle readerModeExtras = new Bundle();
+                readerModeExtras.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 10000);
+                nfcAdapter.enableReaderMode(currentActivity, new NfcAdapter.ReaderCallback() {
+                    @Override
+                    public void onTagDiscovered(Tag tag) {
+                        manager.tag = tag;
+                        Log.d(LOG_TAG, "readerMode onTagDiscovered");
+                        WritableMap nfcTag = null;
+                        // if the tag contains NDEF, we want to report the content
+                        if (Arrays.asList(tag.getTechList()).contains(Ndef.class.getName())) {
+                            Ndef ndef = Ndef.get(tag);
+                            nfcTag = ndef2React(ndef, new NdefMessage[]{ndef.getCachedNdefMessage()});
+                        } else {
+                            nfcTag = tag2React(tag);
+                        }
+                        if (nfcTag != null) {
+                            sendEvent("NfcManagerDiscoverTag", nfcTag);
+                        }
+                        MifareUltralight isoDep = MifareUltralight.get(tag);
+                        if (isoDep != null) {
+                            //verify signature
+                            try {
+                                isoDep.connect();
+                                Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
+                                // signature ok
+                                if (valid) {
+                                    // check password
+                                    byte[] pwd = password.getBytes();
+                                    byte[] pack = packString.getBytes();
+
+                                    //verify password
+                                    final byte[] response = isoDep.transceive(new byte[] {
+                                            (byte) 0x30, // READ
+                                            (byte) 0x83// page address
+                                    });
+
+                                    if(response[3] == (byte) 0xFF) {
+                                        sendEvent("NfcOriginalCheckError", null);
+                                    }else{
+                                        byte[] responseCheckPass = isoDep.transceive(new byte[] {
+                                                (byte) 0x1B, // PWD_AUTH
+                                                pwd[0], pwd[1], pwd[2], pwd[3]
+                                        });
+                                        if ((responseCheckPass != null) && (responseCheckPass.length >= 2)) {
+                                            byte[] packResponse = Arrays.copyOf(responseCheckPass, 2);
+                                            String strPack = new String(packResponse, StandardCharsets.UTF_8);
+                                            if(strPack.equals(packString)){
+                                                sendEvent("NfcOriginalChecked", nfcTag);
+                                            }else{
+                                                sendEvent("NfcOriginalCheckError", null);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    sendEvent("NfcOriginalCheckError", null);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                sendEvent("NfcOriginalCheckError", null);
+                            }
+                        } else {
+                            sendEvent("NfcOriginalCheckError", null);
+                        }
+                    }
+                }, NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B, readerModeExtras);
             } catch (IllegalStateException | NullPointerException e) {
                 Log.w(LOG_TAG, "Illegal State Exception starting NFC. Assuming application is terminating.");
             }

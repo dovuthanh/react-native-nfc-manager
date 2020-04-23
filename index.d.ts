@@ -7,6 +7,8 @@ declare module 'react-native-nfc-manager' {
     DiscoverTag = 'NfcManagerDiscoverTag',
     SessionClosed = 'NfcManagerSessionClosed',
     StateChanged = 'NfcManagerStateChanged',
+    OriginalChecked = 'NfcOriginalChecked',
+    OriginalCheckError = 'NfcOriginalCheckError'
   }
 
   type OnDiscoverTag = (evt: TagEvent) => void;
@@ -135,7 +137,7 @@ declare module 'react-native-nfc-manager' {
     /** [iOS ONLY] */
     sendMifareCommandIOS: (bytes: number[]) => Promise<number[]>;
     /** [iOS ONLY] */
-    verifyOriginalCheckNtag215: (publickKey: string) => Promise<any>;
+    verifyOriginalCheckNtag215: (publicKey: string, password: string, packString: string) => Promise<any>;
     /** [iOS ONLY] */
     sendCommandAPDUIOS: (
       bytesOrApdu: number[] | APDU,
