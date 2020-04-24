@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C3BF8382452DA25005E6034 /* NSString+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3BF8362452DA25005E6034 /* NSString+Hex.m */; };
 		9C9B36BE244573CC0096C5A5 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B36BA244573CC0096C5A5 /* NSData+Hex.m */; };
 		9C9B36BF244573CC0096C5A5 /* GMEllipticCurveCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B36BC244573CC0096C5A5 /* GMEllipticCurveCrypto.m */; };
 		9C9B36C0244573CC0096C5A5 /* GMEllipticCurveCrypto+hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B36BD244573CC0096C5A5 /* GMEllipticCurveCrypto+hash.m */; };
@@ -27,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libNfcManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNfcManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C3BF8362452DA25005E6034 /* NSString+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hex.m"; sourceTree = "<group>"; };
+		9C3BF8372452DA25005E6034 /* NSString+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hex.h"; sourceTree = "<group>"; };
 		9C9B36B8244573CC0096C5A5 /* GMEllipticCurveCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMEllipticCurveCrypto.h; sourceTree = "<group>"; };
 		9C9B36B9244573CC0096C5A5 /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hex.h"; sourceTree = "<group>"; };
 		9C9B36BA244573CC0096C5A5 /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hex.m"; sourceTree = "<group>"; };
@@ -59,6 +62,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				9C3BF8372452DA25005E6034 /* NSString+Hex.h */,
+				9C3BF8362452DA25005E6034 /* NSString+Hex.m */,
 				9C9B36B8244573CC0096C5A5 /* GMEllipticCurveCrypto.h */,
 				9C9B36BC244573CC0096C5A5 /* GMEllipticCurveCrypto.m */,
 				9C9B36BB244573CC0096C5A5 /* GMEllipticCurveCrypto+hash.h */,
@@ -130,6 +135,7 @@
 			files = (
 				9C9B36BE244573CC0096C5A5 /* NSData+Hex.m in Sources */,
 				9C9B36BF244573CC0096C5A5 /* GMEllipticCurveCrypto.m in Sources */,
+				9C3BF8382452DA25005E6034 /* NSString+Hex.m in Sources */,
 				9C9B36C0244573CC0096C5A5 /* GMEllipticCurveCrypto+hash.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* NfcManager.m in Sources */,
 			);

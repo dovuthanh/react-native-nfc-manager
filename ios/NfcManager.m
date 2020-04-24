@@ -6,6 +6,7 @@
 #import "GMEllipticCurveCrypto+hash.h"
 #import "GMEllipticCurveCrypto.h"
 #import "NSData+Hex.h"
+#import "NSString+Hex.h"
 
 NSData *derEncodeSignature(NSData* signature);
 NSData *derDecodeSignature(NSData *der, int keySize);
@@ -575,7 +576,27 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                             NSData *encodedCorrectSignature = derEncodeSignature(response);
                             BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
                             NSLog(@"    Verified: %@", valid ? @"YES": @"NO");
-                            callback(@[[NSNull null],  valid ? @"YES": @"NO"]);
+                            if(valid){
+                                // validate password
+                                // read setting
+                                NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
+                                [mifareTag sendMiFareCommand:readSetting
+                                           completionHandler:^(NSData *responseSetting, NSError *error) {
+                                    if (error) {
+                                        callback(@[[NSNull null],  @"NO"]);
+                                    } else {
+                                        NSString *result = [NSString stringFromHex:[responseSetting hexString]];
+                                        if ([result isEqualToString:packString])
+                                        {
+                                            callback(@[[NSNull null],  @"YES"]);
+                                        }else{
+                                            callback(@[[NSNull null],  @"NO"]);
+                                        }
+                                    }
+                                }];
+                            }else{
+                               callback(@[[NSNull null],  valid ? @"YES": @"NO"]);
+                            }
                         }
                     }];
                     return;
