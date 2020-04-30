@@ -339,7 +339,9 @@ class NfcManager {
   // -------------------------------------
   sendMifareCommandIOS = (bytes) => callNative('sendMifareCommand', [bytes]);
 
-  verifyOriginalCheckNtag215 = (publicKey, password, packString) => callNative('verifyOriginalCheckNtag215', [publicKey, password, packString]);
+  verifyOriginalCheckNtag215 = (publicKey, password, packString, udid) => callNative('verifyOriginalCheckNtag215', [publicKey, password, packString, udid]);
+
+  verifyOriginalCheckNtag215Android = (publicKey, password, packString, udid) => callNative('verifyOriginalCheckNtag215Android', [publicKey, password, packString, udid]);
 
   // -------------------------------------
   // (iOS) NfcTech.Iso15693IOS API

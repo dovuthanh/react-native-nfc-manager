@@ -14,7 +14,7 @@ declare module 'react-native-nfc-manager' {
   type OnDiscoverTag = (evt: TagEvent) => void;
   type OnSessionClosed = (evt: {}) => void;
   type OnStateChanged = (evt: {state: string}) => void;
-  type OnNfcEvents = OnDiscoverTag | OnSessionClosed | OnStateChanged;
+  type OnNfcEvents = OnDiscoverTag | OnSessionClosed | OnStateChanged | OriginalChecked | OriginalCheckError;
 
   export enum NfcTech {
     Ndef = 'Ndef',
@@ -136,8 +136,8 @@ declare module 'react-native-nfc-manager' {
     invalidateSessionWithErrorIOS: (errorMessage: string) => Promise<void>;
     /** [iOS ONLY] */
     sendMifareCommandIOS: (bytes: number[]) => Promise<number[]>;
-    /** [iOS ONLY] */
-    verifyOriginalCheckNtag215: (publicKey: string, password: string, packString: string) => Promise<any>;
+
+    verifyOriginalCheckNtag215: (publicKey: string, password: string, packString: string, udid: string) => Promise<any>;
     /** [iOS ONLY] */
     sendCommandAPDUIOS: (
       bytesOrApdu: number[] | APDU,
@@ -159,6 +159,8 @@ declare module 'react-native-nfc-manager' {
     getCachedNdefMessageAndroid: () => Promise<TagEvent | null>;
     /** [ANDROID ONLY] */
     makeReadOnlyAndroid: () => Promise<boolean>;
+    /** [ANDROID ONLY] */
+    verifyOriginalCheckNtag215Android(publicKey: string, password: string, packString: string, udid: string): Promise<number[]>;
     /** [ANDROID ONLY] */
     transceive(bytes: number[]): Promise<number[]>;
     /** [ANDROID ONLY] */

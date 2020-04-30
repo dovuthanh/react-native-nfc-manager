@@ -576,7 +576,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                             NSData *encodedCorrectSignature = derEncodeSignature(response);
                             BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
                             NSLog(@"    Verified: %@", valid ? @"YES": @"NO");
-                            if(valid){
+                            if(valid && password && password.length >0){
                                 // validate password
                                 // read setting
                                 NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
