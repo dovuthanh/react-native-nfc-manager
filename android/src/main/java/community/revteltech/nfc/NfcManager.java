@@ -1027,8 +1027,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                     public void onTagDiscovered(Tag tag) {
                         manager.tag = tag;
                         boolean needToUnLock = false;
+                        boolean passwordWasSetup = false;
                         byte[] pwd = password.getBytes();
                         byte[] pack = packString.getBytes();
+                        int sleep_time = 100;
+                        int step = 0;
                         String ndfMessage = "";
                         Log.d(LOG_TAG, "readerMode onTagDiscovered");
                         WritableMap nfcTag = null;
@@ -1048,116 +1051,172 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                             //verify signature
                             try {
                                 isoDep.connect();
-                                // checking read status
-                                try{
-                                    // check if NFC has password protected
-                                    final byte[] response = isoDep.transceive(new byte[] {
-                                            (byte) 0x30, // READ
-                                            (byte) 0x83// page address
-                                    });
-                                    needToUnLock = false;
-                                }catch (IOException ex){
-                                    // unlock
-                                    byte[] responseCheckPass1 = isoDep.transceive(new byte[] {
-                                            (byte) 0x1B, // PWD_AUTH
-                                            pwd[0], pwd[1], pwd[2], pwd[3]
-                                    });
-                                    if ((responseCheckPass1 != null) && (responseCheckPass1.length >= 2)) {
-                                        byte[] packResponse = Arrays.copyOf(responseCheckPass1, 2);
-                                        String strPack = new String(packResponse, StandardCharsets.UTF_8);
-                                        if(strPack.equals("cC")){
-                                            // remove password
-                                            byte[] responseRead = isoDep.transceive(new byte[]{
-                                                    (byte) 0x30, // READ
-                                                    (byte) 0x84    // page address
-                                            });
-                                            // write count
-                                            if ((responseRead != null) && (responseRead.length >= 16)) {  // read always returns 4 pages
-                                                boolean prot = false;  // false = PWD_AUTH for write only, true = PWD_AUTH for read and write
-                                                int authlim = 7; // value between 0 and 7
-                                                byte[] responseWrite = isoDep.transceive(new byte[]{
-                                                        (byte) 0xA2, // WRITE
-                                                        (byte) 0x84,   // page address
-                                                        (byte) ((responseRead[0] & 0x078) | (prot ? 0x080 : 0x000) | (authlim & 0x007)),
-                                                        responseRead[1], responseRead[2], responseRead[3]
-                                                });
-                                            }
-                                        }else{ // wrong password
-                                            sendEvent("NfcOriginalCheckError", null);
-                                            Log.w(LOG_TAG, "Wrong password");
-                                            return;
-                                        }
-                                    }
-                                    needToUnLock = true;
-                                }
 
-                                //read data
-                                //fast read data
-                                final byte[] userData = isoDep.transceive(new byte[] {
-                                        (byte) 0x3A, // READ
-                                        (byte) 0x06,// start page address
-                                        (byte) 0x81// end page address
-                                });
-                                ndfMessage = new String(userData, "UTF-8");
-
-                                Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
-                                Boolean passwordCorrect = false;
-                                // signature ok
-                                if (valid) {
-                                    //verify password
-                                    final byte[] response = isoDep.transceive(new byte[]{
-                                            (byte) 0x30, // READ
-                                            (byte) 0x83// page address
-                                    });
-
-                                    if (response[3] == (byte) 0xFF) {
-                                        passwordCorrect = false;
-                                        //sendEvent("NfcOriginalCheckError", null);
-                                    } else {
-                                        byte[] responseCheckPass = isoDep.transceive(new byte[]{
+                                // case 1 checking password
+                                if(!password.isEmpty()) {
+                                    Thread.sleep(500);
+                                    // checking read status
+                                    try {
+                                        // check if NFC has password protected
+                                        final byte[] response = isoDep.transceive(new byte[]{
+                                                (byte) 0x30, // READ
+                                                (byte) 0x83// page address
+                                        });
+                                        step = 1;
+                                        needToUnLock = false;
+                                        Thread.sleep(sleep_time);
+                                    } catch (IOException ex) {
+                                        // unlock
+                                        byte[] responseCheckPass1 = isoDep.transceive(new byte[]{
                                                 (byte) 0x1B, // PWD_AUTH
                                                 pwd[0], pwd[1], pwd[2], pwd[3]
                                         });
-                                        if ((responseCheckPass != null) && (responseCheckPass.length >= 2)) {
-                                            byte[] packResponse = Arrays.copyOf(responseCheckPass, 2);
+                                        step = 2;
+                                        if ((responseCheckPass1 != null) && (responseCheckPass1.length >= 2)) {
+                                            byte[] packResponse = Arrays.copyOf(responseCheckPass1, 2);
                                             String strPack = new String(packResponse, StandardCharsets.UTF_8);
                                             if (strPack.equals(packString)) {
-                                                passwordCorrect = true;
-//                                                sendEvent("NfcOriginalChecked", nfcTag);
-                                            } else {
-                                                passwordCorrect = false;
-//                                                sendEvent("NfcOriginalCheckError", null);
+                                                // remove password
+                                                byte[] responseRead = isoDep.transceive(new byte[]{
+                                                        (byte) 0x30, // READ
+                                                        (byte) 0x84    // page address
+                                                });
+                                                step = 3;
+                                                Thread.sleep(sleep_time);
+                                                // write count
+                                                if ((responseRead != null) && (responseRead.length >= 16)) {  // read always returns 4 pages
+                                                    boolean prot = false;  // false = PWD_AUTH for write only, true = PWD_AUTH for read and write
+                                                    int authlim = 7; // value between 0 and 7
+                                                    byte[] responseWrite = isoDep.transceive(new byte[]{
+                                                            (byte) 0xA2, // WRITE
+                                                            (byte) 0x84,   // page address
+                                                            (byte) ((responseRead[0] & 0x078) | (prot ? 0x080 : 0x000) | (authlim & 0x007)),
+                                                            responseRead[1], responseRead[2], responseRead[3]
+                                                    });
+                                                    step = 4;
+                                                    Thread.sleep(sleep_time);
+                                                }
+                                            } else { // wrong password
+                                                sendEvent("NfcOriginalCheckError", null);
+                                                Log.w(LOG_TAG, "Wrong password");
+                                                return;
                                             }
                                         }
+                                        needToUnLock = true;
                                     }
-                                }
-                                if(needToUnLock || valid && !password.isEmpty()) {
-                                    // set password for read again
-                                    byte[] responseRead = isoDep.transceive(new byte[]{
-                                            (byte) 0x30, // READ
-                                            (byte) 0x84    // page address
+
+                                    //read data
+                                    //fast read data
+                                    final byte[] userData = isoDep.transceive(new byte[]{
+                                            (byte) 0x3A, // READ
+                                            (byte) 0x06,// start page address
+                                            (byte) 0x31// end page address
                                     });
-                                    // write count
-                                    if ((responseRead != null) && (responseRead.length >= 16)) {  // read always returns 4 pages
-                                        boolean prot = true;  // false = PWD_AUTH for write only, true = PWD_AUTH for read and write
-                                        int authlim = 7; // value between 0 and 7
-                                        byte[] responseWrite = isoDep.transceive(new byte[]{
-                                                (byte) 0xA2, // WRITE
-                                                (byte) 0x84,   // page address
-                                                (byte) ((responseRead[0] & 0x078) | (prot ? 0x080 : 0x000) | (authlim & 0x007)),
-                                                responseRead[1], responseRead[2], responseRead[3]
+                                    Thread.sleep(sleep_time);
+                                    step = 5;
+                                    ndfMessage = new String(userData, "UTF-8");
+
+                                    Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
+                                    Boolean passwordCorrect = false;
+                                    // signature ok
+                                    if (valid) {
+                                        //verify password
+                                        final byte[] response = isoDep.transceive(new byte[]{
+                                                (byte) 0x30, // READ
+                                                (byte) 0x83// page address
                                         });
+                                        step = 6;
+                                        Thread.sleep(sleep_time);
+
+                                        if (!needToUnLock) { // not unlock meant need to check password
+                                            if (response[3] == (byte) 0xFF) {
+                                                passwordCorrect = true;
+                                                //sendEvent("NfcOriginalCheckError", null);
+                                            } else {
+                                                passwordWasSetup = true;
+                                                byte[] responseCheckPass = isoDep.transceive(new byte[]{
+                                                        (byte) 0x1B, // PWD_AUTH
+                                                        pwd[0], pwd[1], pwd[2], pwd[3]
+                                                });
+                                                step = 7;
+                                                Thread.sleep(sleep_time);
+                                                if ((responseCheckPass != null) && (responseCheckPass.length >= 2)) {
+                                                    byte[] packResponse = Arrays.copyOf(responseCheckPass, 2);
+                                                    String strPack = new String(packResponse, StandardCharsets.UTF_8);
+                                                    if (strPack.equals(packString)) {
+                                                        passwordCorrect = true;
+//                                                sendEvent("NfcOriginalChecked", nfcTag);
+                                                    } else {
+                                                        passwordCorrect = false;
+//                                                sendEvent("NfcOriginalCheckError", null);
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            passwordCorrect = true;
+                                        }
+                                    }
+                                    if (valid && !password.isEmpty()) {
+
+                                        if (needToUnLock) {
+                                            //set password
+                                            byte[] setPWD = isoDep.transceive(new byte[]{
+                                                    (byte) 0xA2, // WRITE
+                                                    (byte) 0x85,   // page address
+                                                    pwd[0], pwd[1], pwd[2], pwd[3]
+                                            });
+                                            step = 8;
+                                            Thread.sleep(sleep_time);
+
+                                            byte[] setPack = isoDep.transceive(new byte[]{
+                                                    (byte) 0xA2, // WRITE
+                                                    (byte) 0x86,   // page address
+                                                    pack[0], pack[1],   // bytes 0-1 are PACK value
+                                                    (byte) 0, (byte) 0  // other bytes are RFU and must be written as 0
+                                            });
+                                            step = 9;
+                                            Thread.sleep(sleep_time);
+                                        }
+
+                                        // set password for read again
+                                        byte[] responseRead = isoDep.transceive(new byte[]{
+                                                (byte) 0x30, // READ
+                                                (byte) 0x84    // page address
+                                        });
+                                        step = 10;
+                                        Thread.sleep(sleep_time);
+                                        // write count
+                                        if ((responseRead != null) && (responseRead.length >= 16)) {  // read always returns 4 pages
+                                            boolean prot = true;  // false = PWD_AUTH for write only, true = PWD_AUTH for read and write
+                                            int authlim = 7; // value between 0 and 7
+                                            byte[] responseWrite = isoDep.transceive(new byte[]{
+                                                    (byte) 0xA2, // WRITE
+                                                    (byte) 0x84,   // page address
+                                                    (byte) ((responseRead[0] & 0x078) | (prot ? 0x080 : 0x000) | (authlim & 0x007)),
+                                                    responseRead[1], responseRead[2], responseRead[3]
+                                            });
+                                            step = 11;
+                                        }
+                                    }
+                                    if (passwordCorrect) {
+                                        nfcTag.putString("ndfMessage", ndfMessage);
+                                        sendEvent("NfcOriginalChecked", nfcTag);
+                                    } else {
+                                        sendEvent("NfcOriginalCheckError", null);
+                                    }
+                                }else{
+                                    Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
+                                    if(valid){
+                                        nfcTag.putString("ndfMessage", ndfMessage);
+                                        sendEvent("NfcOriginalChecked", nfcTag);
+                                    }else{
+                                        sendEvent("NfcOriginalCheckError", null);
                                     }
                                 }
-                                if(passwordCorrect){
-                                    nfcTag.putString("ndfMessage", ndfMessage);
-                                    sendEvent("NfcOriginalChecked", nfcTag);
-                                }else{
-                                    sendEvent("NfcOriginalCheckError", null);
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            } catch (IOException | InterruptedException e) {
                                 sendEvent("NfcOriginalCheckError", null);
+                            }finally {
+                                Log.w(LOG_TAG, "step: " + step);
                             }
                         } else {
                             sendEvent("NfcOriginalCheckError", null);

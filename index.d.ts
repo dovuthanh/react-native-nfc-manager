@@ -2,6 +2,8 @@
 // Project: https://github.com/whitedogg13/react-native-nfc-manager
 // Definitions by: April Ayres <april.ayres@papercut.com> and Paul Huynh <paul.huynh@papercut.com>
 
+import {NfcTech} from "react-native-nfc-manager";
+
 declare module 'react-native-nfc-manager' {
   export enum NfcEvents {
     DiscoverTag = 'NfcManagerDiscoverTag',
@@ -118,7 +120,7 @@ declare module 'react-native-nfc-manager' {
 
     setEventListener(name: NfcEvents, callback: OnNfcEvents | null): void;
 
-    requestTechnology: (tech: NfcTech) => Promise<NfcTech>;
+    requestTechnology: (tech: NfcTech, detectPassword: string) => Promise<any>;
 
     cancelTechnologyRequest: () => Promise<void>;
 
@@ -137,7 +139,7 @@ declare module 'react-native-nfc-manager' {
     /** [iOS ONLY] */
     sendMifareCommandIOS: (bytes: number[]) => Promise<number[]>;
 
-    verifyOriginalCheckNtag215: (publicKey: string, password: string, packString: string, udid: string) => Promise<any>;
+    verifyOriginalCheckNtag215: (publicKey: string, password: string, packString: string, udid: string, nfcPasswordProtection: string) => Promise<any>;
     /** [iOS ONLY] */
     sendCommandAPDUIOS: (
       bytesOrApdu: number[] | APDU,

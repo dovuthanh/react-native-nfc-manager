@@ -166,7 +166,7 @@ class NfcManager {
 
   getTag = () => callNative('getTag');
 
-  requestTechnology = async (tech, options={}) => {
+  requestTechnology = async (tech, detectPassword, options={}) => {
     try {
       if (typeof tech === 'string') {
         tech = [tech];
@@ -192,7 +192,7 @@ class NfcManager {
         this.cleanUpTagRegistration = true;
       }
 
-      return callNative('requestTechnology', [tech]);
+      return callNative('requestTechnology', [tech, detectPassword]);
     } catch (ex) {
       throw ex;
     }
@@ -339,7 +339,7 @@ class NfcManager {
   // -------------------------------------
   sendMifareCommandIOS = (bytes) => callNative('sendMifareCommand', [bytes]);
 
-  verifyOriginalCheckNtag215 = (publicKey, password, packString, udid) => callNative('verifyOriginalCheckNtag215', [publicKey, password, packString, udid]);
+  verifyOriginalCheckNtag215 = (publicKey, password, packString, udid, nfcPasswordProtection) => callNative('verifyOriginalCheckNtag215', [publicKey, password, packString, udid, nfcPasswordProtection]);
 
   verifyOriginalCheckNtag215Android = (publicKey, password, packString, udid) => callNative('verifyOriginalCheckNtag215Android', [publicKey, password, packString, udid]);
 
@@ -389,6 +389,14 @@ class NfcManager {
     this._clientListeners = {};
     this._subscriptions[NfcEvents.DiscoverTag] = NfcManagerEmitter.addListener(
       NfcEvents.DiscoverTag, this._onDiscoverTag
+    );
+
+    this._subscriptions[NfcEvents.OriginalChecked] = NfcManagerEmitter.addListener(
+        NfcEvents.OriginalChecked, this._onOriginalChecked
+    );
+
+    this._subscriptions[NfcEvents.OriginalCheckError] = NfcManagerEmitter.addListener(
+        NfcEvents.OriginalCheckError, this._onOriginalCheckError
     );
 
     if (Platform.OS === 'ios') {
