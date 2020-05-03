@@ -581,6 +581,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
 {
     if (@available(iOS 13.0, *)) {
         NSMutableDictionary *resultChecking = @{}.mutableCopy;
+        float sleepTime = 0.5;
         if (sessionEx != nil) {
             if (sessionEx.connectedTag) {
                 id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
@@ -589,7 +590,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                         // meant need to try to use password first
                         NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
                         NSLog(@"input bytes: %@", [readSetting hexString]);
-                        sleep(0.2);
+                        sleep(sleepTime);
                         [mifareTag sendMiFareCommand:readSetting
                                    completionHandler:^(NSData *responseSetting, NSError *error) {
                             if (error) {
@@ -601,7 +602,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                     //unlock prot
                                     NSString * myString = [NSString stringWithFormat:@"A28407050000"];
                                     NSData *unlockRead = [NSData dataWithHexString:myString];
-                                    sleep(0.2);
+                                    sleep(1);
                                     [mifareTag sendMiFareCommand:unlockRead
                                            completionHandler:^(NSData *unlockReadData, NSError *error) {
                                         if (error) {
@@ -610,7 +611,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                             //verify singature
                                             NSData *data = [NSData dataWithHexString:@"3C00"];
                                             NSLog(@"input bytes: %@", getHexString(data));
-                                            sleep(0.2);
+                                            sleep(sleepTime);
                                             [mifareTag sendMiFareCommand:data
                                                        completionHandler:^(NSData *response, NSError *error) {
                                                 if (error) {
@@ -626,7 +627,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                     if(valid){
                                                         // read user data
                                                         NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
-                                                        sleep(0.2);
+                                                        sleep(sleepTime);
                                                         [mifareTag sendMiFareCommand:commandReadUserData
                                                                completionHandler:^(NSData *userData, NSError *error) {
                                                             if (error) {
@@ -635,7 +636,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                                 // lock data for read
                                                                 NSString * myString = [NSString stringWithFormat:@"A28487050000"];
                                                                 NSData *lockRead = [NSData dataWithHexString:myString];
-                                                                sleep(0.2);
+                                                                sleep(sleepTime);
                                                                 [mifareTag sendMiFareCommand:lockRead
                                                                        completionHandler:^(NSData *lockReadResponse, NSError *error) {
                                                                     if (error) {
@@ -668,7 +669,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                         if(password.length == 0){ // just verify signature
                             NSData *data = [NSData dataWithHexString:@"3C00"];
                             NSLog(@"input bytes: %@", getHexString(data));
-                            sleep(0.2);
+                            sleep(sleepTime);
                             [mifareTag sendMiFareCommand:data
                                        completionHandler:^(NSData *response, NSError *error) {
                                 if (error) {
@@ -682,7 +683,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                     NSData *encodedCorrectSignature = derEncodeSignature(response);
                                     BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
                                     NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
-                                    sleep(0.2);
+                                    sleep(sleepTime);
                                     [mifareTag sendMiFareCommand:commandReadUserData
                                            completionHandler:^(NSData *userData, NSError *error) {
                                         if (error) {
@@ -698,7 +699,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                             // start reading information
                                 NSData *data = [NSData dataWithHexString:@"3C00"];
                             NSLog(@"input bytes: %@", getHexString(data));
-                            sleep(0.2);
+                            sleep(sleepTime);
                             [mifareTag sendMiFareCommand:data
                                        completionHandler:^(NSData *response, NSError *error) {
                                 if (error) {
@@ -716,7 +717,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                         // validate password
                                         // read setting
                                         NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
-                                        sleep(0.2);
+                                        sleep(sleepTime);
                                         [mifareTag sendMiFareCommand:readSetting
                                                    completionHandler:^(NSData *responseSetting, NSError *error) {
                                             if (error) {
@@ -726,7 +727,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                 if ([result isEqualToString:packString])
                                                 {
                                                     // read user data
-                                                    sleep(0.2);
+                                                    sleep(sleepTime);
                                                     NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
                                                     [mifareTag sendMiFareCommand:commandReadUserData
                                                            completionHandler:^(NSData *userData, NSError *error) {
@@ -736,7 +737,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                             // lock data for read
                                                             NSString * myString = [NSString stringWithFormat:@"A28487050000"];
                                                             NSData *unlockRead = [NSData dataWithHexString:myString];
-                                                            sleep(0.2);
+                                                            sleep(sleepTime);
                                                             [mifareTag sendMiFareCommand:unlockRead
                                                                    completionHandler:^(NSData *userData, NSError *error) {
                                                                 if (error) {
