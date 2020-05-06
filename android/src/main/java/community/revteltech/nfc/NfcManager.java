@@ -1046,12 +1046,15 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                             sendEvent("NfcManagerDiscoverTag", nfcTag);
                             return;
                         }
+                        String tagId = ByteArrayToHexString(tag.getId()); //hex
+                        if(!tagId.equals(udid)){
+                            sendEvent("NfcOriginalCheckError", null);
+                        }
                         MifareUltralight isoDep = MifareUltralight.get(tag);
                         if (isoDep != null) {
                             //verify signature
                             try {
                                 isoDep.connect();
-
                                 // case 1 checking password
                                 if(!password.isEmpty()) {
                                     Thread.sleep(500);
@@ -1477,6 +1480,24 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
             value.pushInt((bytes[i] & 0xFF));
         }
         return value;
+    }
+
+    /**
+     * Utility class to convert a byte array to a hexadecimal string.
+     *
+     * @param bytes Bytes to convert
+     * @return String, containing hexadecimal representation.
+     */
+    public static String ByteArrayToHexString(byte[] bytes) {
+        final char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        char[] hexChars = new char[bytes.length * 2];
+        int v;
+        for ( int j = 0; j < bytes.length; j++ ) {
+            v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
     }
 }
 

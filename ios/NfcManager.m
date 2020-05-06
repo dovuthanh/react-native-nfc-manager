@@ -579,13 +579,19 @@ RCT_EXPORT_METHOD(sendMifareCommand:(NSArray *)bytes callback: (nonnull RCTRespo
 
 RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)password :(NSString *)packString :(NSString *)udid :(NSString *) nfcPasswordProtection callback: (nonnull RCTResponseSenderBlock)callback)
 {
+    NSLog(@"N - GO HERE");
     if (@available(iOS 13.0, *)) {
         NSMutableDictionary *resultChecking = @{}.mutableCopy;
-        float sleepTime = 0.5;
+        float sleepTime = 0.2;
         if (sessionEx != nil) {
             if (sessionEx.connectedTag) {
                 id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
                 if (mifareTag) {
+                    NSString *tagUdid = [mifareTag.identifier hexString];
+                    if([tagUdid isEqualToString:udid]){
+                        callback(@[@"ERROR  595", @"ERROR  595"]);
+                        return;
+                    }
                     if([nfcPasswordProtection isEqualToString:@"YES"]){
                         // meant need to try to use password first
                         NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
@@ -594,19 +600,22 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                         [mifareTag sendMiFareCommand:readSetting
                                    completionHandler:^(NSData *responseSetting, NSError *error) {
                             if (error) {
-                                callback(@[getErrorMessage(error), @"ERROR  595"]);
+                                NSLog(@"N - ERROR 595");
+                                callback(@[@"ERROR  595", @"ERROR  595"]);
                             } else {
-                                NSString *result = [NSString stringFromHex:[responseSetting hexString]];
+                                NSString *resultCC = [NSString stringFromHex:[responseSetting hexString]];
+                                NSString *lowcaseCC = [resultCC lowercaseString];
                                 //check password
-                                if ([result isEqualToString:packString]){
+                                if ([resultCC isEqualToString:packString] || [lowcaseCC isEqualToString:packString]){
                                     //unlock prot
                                     NSString * myString = [NSString stringWithFormat:@"A28407050000"];
                                     NSData *unlockRead = [NSData dataWithHexString:myString];
-                                    sleep(1);
+                                    sleep(0.5);
                                     [mifareTag sendMiFareCommand:unlockRead
                                            completionHandler:^(NSData *unlockReadData, NSError *error) {
                                         if (error) {
-                                            callback(@[getErrorMessage(error), @"ERROR  608"]);
+                                            callback(@[@"N - ERROR  608", @"ERROR  608"]);
+                                            NSLog(@"ERROR  608");
                                         } else {
                                             //verify singature
                                             NSData *data = [NSData dataWithHexString:@"3C00"];
@@ -615,7 +624,8 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                             [mifareTag sendMiFareCommand:data
                                                        completionHandler:^(NSData *response, NSError *error) {
                                                 if (error) {
-                                                    callback(@[getErrorMessage(error), @"ERROR  624"]);
+                                                    NSLog(@"N - ERROR  624");
+                                                    callback(@[@"ERROR  624", @"ERROR  624"]);
                                                 } else {
                                                     GMEllipticCurve curve = GMEllipticCurveSecp128r1;
                                                     NSString *udid = [NSString stringWithFormat:@"000000000000000000%@",[[mifareTag identifier] hexString]];
@@ -631,7 +641,8 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                         [mifareTag sendMiFareCommand:commandReadUserData
                                                                completionHandler:^(NSData *userData, NSError *error) {
                                                             if (error) {
-                                                                callback(@[getErrorMessage(error), @"ERROR  632"]);
+                                                                NSLog(@"N - ERROR  632");
+                                                                callback(@[@"ERROR  632", @"ERROR  632"]);
                                                             } else {
                                                                 // lock data for read
                                                                 NSString * myString = [NSString stringWithFormat:@"A28487050000"];
@@ -640,7 +651,8 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                                 [mifareTag sendMiFareCommand:lockRead
                                                                        completionHandler:^(NSData *lockReadResponse, NSError *error) {
                                                                     if (error) {
-                                                                        callback(@[getErrorMessage(error), @"ERROR  641"]);
+                                                                        NSLog(@"N - ERROR  641");
+                                                                        callback(@[@"ERROR  641", @"ERROR  641"]);
                                                                     } else {
                                                                         NSString *encryptedString = [userData hexString];
                                                                         encryptedString = [NSString stringFromHex:encryptedString];
@@ -652,6 +664,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                                             }
                                                         }];
                                                     }else{
+                                                        NSLog(@"N - ERROR  672");
                                                         [resultChecking setValue:@"WRONG SIGNATURE - TESTING PASSWORD - 672" forKey:@"error"];
                                                         callback(@[[NSNull null],  resultChecking]);
                                                     }
@@ -661,6 +674,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                     }];
                                 }else{
                                     [resultChecking setValue:@"1B READ PASSWORD OK BUT NOT MATCH - 679" forKey:@"error"];
+                                    NSLog(@"N - ERROR  670");
                                     callback(@[[NSNull null],  resultChecking]);
                                 }
                             }
@@ -723,9 +737,10 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                             if (error) {
                                                 callback(@[[NSNull null],  @"1B - READING NOT READ PASSWORD 707"]);
                                             } else {
-                                                NSString *result = [NSString stringFromHex:[responseSetting hexString]];
-                                                if ([result isEqualToString:packString])
-                                                {
+                                                NSString *resultCC = [NSString stringFromHex:[responseSetting hexString]];
+                                                NSString *lowcaseCC = [resultCC lowercaseString];
+                                                //check password
+                                                if ([resultCC isEqualToString:packString] || [lowcaseCC isEqualToString:packString]){
                                                     // read user data
                                                     sleep(sleepTime);
                                                     NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
