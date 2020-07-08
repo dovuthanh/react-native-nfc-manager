@@ -1,82 +1,82 @@
 [
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_primary_text_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_secondary_text_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_spinner.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_spinner.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/switch_thumb_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/switch_thumb_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_secondary_text_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_primary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_edittext.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_edittext.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/switch_thumb_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/switch_thumb_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_btn_colored_text_material.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_btn_colored_text_material.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_background_cache_hint_selector_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_primary_text_disable_only_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_secondary_text_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_hint_foreground_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_hint_foreground_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_btn_checkable.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_btn_checkable.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_search_url_text.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_search_url_text.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_switch_track.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_switch_track.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_background_cache_hint_selector_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_primary_text_disable_only_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_seek_thumb.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_search_url_text.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_search_url_text.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_btn_checkable.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_seek_thumb.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_seek_thumb.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_primary_text_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_primary_text_disable_only_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_default.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_default.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_btn_colored_text_material.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_btn_colored_text_material.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_hint_foreground_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_hint_foreground_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_background_cache_hint_selector_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_background_cache_hint_selector_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_edittext.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_edittext.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_primary_text_material_dark.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_primary_text_material_dark.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_hint_foreground_material_light.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_hint_foreground_material_light.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_hint_foreground_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_hint_foreground_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_spinner.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_spinner.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_default.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/abc_tint_default.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/switch_thumb_material_dark.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/switch_thumb_material_dark.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/switch_thumb_material_light.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/color/switch_thumb_material_light.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/color/abc_tint_switch_track.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/color/abc_tint_switch_track.xml"
     }
 ]

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

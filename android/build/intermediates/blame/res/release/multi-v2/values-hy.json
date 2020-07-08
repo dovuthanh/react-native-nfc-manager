@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-hy/values-hy.xml",
+            "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hy/values-hy.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/values-hy/values-hy.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/values-hy/values-hy.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -33,10 +33,10 @@
             ]
         },
         {
-            "outputFile": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hy/values-hy.xml",
+            "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-hy/values-hy.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/96a45bfb55e72c74a486b4a0a928c334/res/values-hy/values-hy.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -46,7 +46,7 @@
                     }
                 },
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/values-hy/values-hy.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

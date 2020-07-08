@@ -1,0 +1,22 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="community.revteltech.nfc" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="22"
+6-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="28" />
+7-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.NFC" />
+9-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:5-62
+9-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:22-59
+10
+11    <uses-feature
+11-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:4:5-82
+12        android:name="android.hardware.nfc"
+12-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:4:19-54
+13        android:required="false" />
+13-->/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:4:55-79
+14
+15</manifest>

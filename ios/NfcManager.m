@@ -236,31 +236,38 @@ RCT_EXPORT_MODULE()
                                 pendingCallback(@[getErrorMessage(error)]);
                                 return;
                             }
-//                            if([self->detectPasswordInRequestTech isEqualToString:@"YES"]){
-//                                //check if tag about password proctection
-//                                id<NFCMiFareTag> mifareTag = [session.connectedTag asNFCMiFareTag];
-//                                NSData *testReadConfirguration = [NSData dataWithHexString:@"3083"];
-//                                NSLog(@"testReadConfirguration: %@", [testReadConfirguration hexString]);
-//                                [mifareTag sendMiFareCommand:testReadConfirguration
-//                                           completionHandler:^(NSData *response, NSError *error) {
-//                                    NSMutableDictionary *tagInfo = @{}.mutableCopy;
-//                                    [tagInfo setValue:requestType forKey:@"requestType"];
-//                                    [tagInfo setObject:getHexString(mifareTag.identifier) forKey:@"id"];
-//                                    if([[response hexString] isEqualToString:@"00"]){
-//                                        [tagInfo setValue:@"YES" forKey:@"passwordProtection"];
-//                                    }else{
-//                                        [tagInfo setValue:@"NO" forKey:@"passwordProtection"];
-//                                    }
-//                                    pendingCallback(@[[NSNull null], tagInfo]);
-//                                }];
-//                            }else{
-                                id<NFCMiFareTag> mifareTag = [session.connectedTag asNFCMiFareTag];
-                                NSMutableDictionary *tagInfo = @{}.mutableCopy;
-                                [tagInfo setObject:getHexString(mifareTag.identifier) forKey:@"id"];
-                                [tagInfo setValue:requestType forKey:@"requestType"];
-                                [tagInfo setValue:@"NO" forKey:@"passwordProtection"];
-                                pendingCallback(@[[NSNull null], tagInfo]);
-//                            }
+                            id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
+                          NSData *data = [NSData dataWithHexString:@"3C00"];
+                          NSLog(@"input bytes: %@", getHexString(data));
+                          [mifareTag sendMiFareCommand:data
+                                     completionHandler:^(NSData *response, NSError *error) {
+                              if (error) {
+                                 pendingCallback(@[getErrorMessage(error)]);
+                                 return;
+                              } else {
+                                  if(response.length == 1){
+                                      pendingCallback(@[getErrorMessage(error)]);
+                                      return;
+                                  }else{
+                                      GMEllipticCurve curve = GMEllipticCurveSecp128r1;
+                                      GMEllipticCurveCrypto *crypto = [GMEllipticCurveCrypto cryptoForCurve:curve];
+                                      crypto = [GMEllipticCurveCrypto cryptoForKeyBase64:@"BElOGjhtPTz+PcEOXeaKSZscIC21sTI5PontGf5b6Lxh"];
+                                      NSData *udidData = [NSData dataWithHexString: [NSString stringWithFormat:@"000000000000000000%@",getHexString(mifareTag.identifier)]];
+                                      NSData *encodedCorrectSignature = derEncodeSignature(response);
+                                      BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
+                                      if(valid){
+                                        NSMutableDictionary *tagInfo = @{}.mutableCopy;
+                                        [tagInfo setObject:getHexString(mifareTag.identifier) forKey:@"id"];
+                                        [tagInfo setValue:requestType forKey:@"requestType"];
+                                        [tagInfo setValue:@"NO" forKey:@"passwordProtection"];
+                                        pendingCallback(@[[NSNull null], tagInfo]);
+                                      }else{
+                                          pendingCallback(@[getErrorMessage(error)]);
+                                          return;
+                                      }
+                                  }
+                              }
+                            }];
                         }];
                         found = true;
                         break;
@@ -588,7 +595,7 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
             if (sessionEx.connectedTag) {
                 id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
                 NSString *udidTag  = [mifareTag.identifier hexString];
-                float sleepTime = 0.1;
+                float sleepTime = 0.5;
                 if(![[udid uppercaseString] isEqualToString:[udidTag uppercaseString]]){
                     callback(@[[NSNull null], @"ERROR  595"]);
                     [sessionEx invalidateSession];
@@ -606,182 +613,58 @@ RCT_EXPORT_METHOD(verifyOriginalCheckNtag215:(NSString *)publicKey :(NSString *)
                                 callback(@[getErrorMessage(error), @"ERROR  595"]);
                                 [sessionEx invalidateSession];
                             } else {
-                                //unlock prot
-                                NSString * myString = [NSString stringWithFormat:@"A28407050000"];
-                                NSData *unlockRead = [NSData dataWithHexString:myString];
+                                if(responseSetting.length == 1){
+                                    callback(@[getErrorMessage(error), @"ERROR  595"]);
+                                    [sessionEx invalidateSession];
+                                    return;
+                                }
+                                // read user data
+                                NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
                                 sleep(sleepTime);
-                                [mifareTag sendMiFareCommand:unlockRead
-                                       completionHandler:^(NSData *unlockReadData, NSError *error) {
+                                [mifareTag sendMiFareCommand:commandReadUserData
+                                       completionHandler:^(NSData *userData, NSError *error) {
                                     if (error) {
-                                        callback(@[getErrorMessage(error), @"ERROR  608"]);
+                                        callback(@[getErrorMessage(error), @"ERROR  632"]);
                                         [sessionEx invalidateSession];
                                     } else {
-                                        //verify singature
-                                        NSData *data = [NSData dataWithHexString:@"3C00"];
-                                        NSLog(@"input bytes: %@", getHexString(data));
-                                        sleep(sleepTime);
-                                        [mifareTag sendMiFareCommand:data
-                                                   completionHandler:^(NSData *response, NSError *error) {
-                                            if (error) {
-                                                callback(@[getErrorMessage(error), @"ERROR  624"]);
-                                                [sessionEx invalidateSession];
-                                            } else {
-                                                // read user data
-                                                NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
-                                                sleep(sleepTime);
-                                                [mifareTag sendMiFareCommand:commandReadUserData
-                                                       completionHandler:^(NSData *userData, NSError *error) {
-                                                    if (error) {
-                                                        callback(@[getErrorMessage(error), @"ERROR  632"]);
-                                                        [sessionEx invalidateSession];
-                                                    } else {
-                                                        // lock data for read
-                                                        NSString * myString = [NSString stringWithFormat:@"A28487050000"];
-                                                        NSData *lockRead = [NSData dataWithHexString:myString];
-                                                        sleep(sleepTime);
-                                                        [mifareTag sendMiFareCommand:lockRead
-                                                               completionHandler:^(NSData *lockReadResponse, NSError *error) {
-                                                            if (error) {
-                                                                callback(@[getErrorMessage(error), @"ERROR  641"]);
-                                                                [sessionEx invalidateSession];
-                                                            } else {
-                                                                GMEllipticCurve curve = GMEllipticCurveSecp128r1;
-                                                                GMEllipticCurveCrypto *crypto = [GMEllipticCurveCrypto cryptoForCurve:curve];
-                                                                crypto = [GMEllipticCurveCrypto cryptoForKeyBase64:publicKey];
-                                                                NSData *udidData = [NSData dataWithHexString: [NSString stringWithFormat:@"000000000000000000%@",udid]];
-                                                                NSData *encodedCorrectSignature = derEncodeSignature(response);
-                                                                BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
-                                                                if(valid){
-                                                                    NSString *encryptedString = [userData hexString];
-                                                                    encryptedString = [NSString stringFromHex:encryptedString];
-                                                                    encryptedString = encryptedString? encryptedString : @"";
-                                                                    [resultChecking setValue:encryptedString forKey:@"encryptedString"];
-                                                                    callback(@[[NSNull null],  resultChecking]);
-                                                                    [sessionEx invalidateSession];
-                                                                }else{
-                                                                    [resultChecking setValue:@"WRONG SIGNATURE - TESTING PASSWORD - 672" forKey:@"error"];
-                                                                    callback(@[[NSNull null],  resultChecking]);
-                                                                    [sessionEx invalidateSession];
-                                                                }
-                                                            }
-                                                        }];
-                                                    }
-                                                }];
-                                            }
-                                        }];
+                                        NSString *encryptedString = [userData hexString];
+                                        encryptedString = [NSString stringFromHex:encryptedString];
+                                        encryptedString = encryptedString? encryptedString : @"";
+                                        [resultChecking setValue:encryptedString forKey:@"encryptedString"];
+                                        callback(@[[NSNull null],  resultChecking]);
+                                        [sessionEx invalidateSession];
                                     }
                                 }];
                             }
                         }];
                     }else{
-                        if(password.length == 0){ // just verify signature
-                            NSData *data = [NSData dataWithHexString:@"3C00"];
-                            NSLog(@"input bytes: %@", getHexString(data));
-                            sleep(sleepTime);
-                            [mifareTag sendMiFareCommand:data
-                                       completionHandler:^(NSData *response, NSError *error) {
-                                if (error) {
-                                    callback(@[getErrorMessage(error), [NSNull null]]);
-                                    [sessionEx invalidateSession];
-                                } else {
-                                    NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
-                                    sleep(sleepTime);
-                                    [mifareTag sendMiFareCommand:commandReadUserData
-                                           completionHandler:^(NSData *userData, NSError *error) {
-                                        if (error) {
-                                            callback(@[[NSNull null],  @"3A0631 ERROR AT 586"]);
-                                            [sessionEx invalidateSession];
-                                        } else {
-                                            GMEllipticCurve curve = GMEllipticCurveSecp128r1;
-                                            GMEllipticCurveCrypto *crypto = [GMEllipticCurveCrypto cryptoForCurve:curve];
-                                            crypto = [GMEllipticCurveCrypto cryptoForKeyBase64:publicKey];
-                                            NSData *udidData = [NSData dataWithHexString: [NSString stringWithFormat:@"000000000000000000%@",udid]];
-                                            NSData *encodedCorrectSignature = derEncodeSignature(response);
-                                            BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
-                                            if(valid){
-                                                NSString *encryptedString = [userData hexString];
-                                                encryptedString = [NSString stringFromHex:encryptedString];
-                                                encryptedString = encryptedString? encryptedString : @"";
-                                                [resultChecking setValue:encryptedString forKey:@"encryptedString"];
-                                                callback(@[[NSNull null],  resultChecking]);
-                                                [sessionEx invalidateSession];
-                                            }else{
-                                                [resultChecking setValue:@"WRONG SIGNATURE - TESTING PASSWORD - 703" forKey:@"error"];
-                                                callback(@[[NSNull null],  resultChecking]);
-                                                [sessionEx invalidateSession];
-                                            }
-                                        }
-                                    }];
-                                }
-                            }];
-                        }else{
-                            // start reading information
-                                NSData *data = [NSData dataWithHexString:@"3C00"];
-                            NSLog(@"input bytes: %@", getHexString(data));
-                            sleep(0.2);
-//                            [mifareTag sendMiFareCommand:data
-//                                       completionHandler:^(NSData *response, NSError *error) {
-//                                if (error) {
-//                                    callback(@[getErrorMessage(error), @"3C00 - NO TESTING PASSWORD - 690"]);
-//                                } else {
-//                                    GMEllipticCurve curve = GMEllipticCurveSecp128r1;
-//                                    NSString *udid = [NSString stringWithFormat:@"000000000000000000%@",[[mifareTag identifier] hexString]];
-//                                    GMEllipticCurveCrypto *crypto = [GMEllipticCurveCrypto cryptoForCurve:curve];
-//                                    crypto = [GMEllipticCurveCrypto cryptoForKeyBase64:publicKey];
-//                                    NSData *udidData = [NSData dataWithHexString:udid];
-//                                    NSData *encodedCorrectSignature = derEncodeSignature(response);
-//                                    BOOL valid = [crypto verifyEncodedSignature:encodedCorrectSignature forHash:udidData];
-//                                    NSLog(@"    Verified: %@", valid ? @"YES": @"NO");
-//                                    if(valid){
-//                                        // validate password
-//                                        // read setting
-//                                        NSData *readSetting = [NSData dataWithHexString:[NSString stringWithFormat:@"1B%@", [NSString stringToHex:password]]];
-//                                        sleep(0.2);
-//                                        [mifareTag sendMiFareCommand:readSetting
-//                                                   completionHandler:^(NSData *responseSetting, NSError *error) {
-//                                            if (error) {
-//                                                callback(@[[NSNull null],  @"1B - READING NOT READ PASSWORD 707"]);
-//                                            } else {
-//                                                NSString *result = [NSString stringFromHex:[responseSetting hexString]];
-//                                                if ([result isEqualToString:packString])
-//                                                {
-//                                                    // read user data
-//                                                    sleep(0.2);
-//                                                    NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
-//                                                    [mifareTag sendMiFareCommand:commandReadUserData
-//                                                           completionHandler:^(NSData *userData, NSError *error) {
-//                                                        if (error) {
-//                                                            callback(@[[NSNull null],  @"3A0631 - 717"]);
-//                                                        } else {
-//                                                            // lock data for read
-//                                                            NSString * myString = [NSString stringWithFormat:@"A28487050000"];
-//                                                            NSData *unlockRead = [NSData dataWithHexString:myString];
-//                                                            sleep(0.2);
-//                                                            [mifareTag sendMiFareCommand:unlockRead
-//                                                                   completionHandler:^(NSData *userData, NSError *error) {
-//                                                                if (error) {
-//                                                                    callback(@[[NSNull null],  @"A28487050000 - 725"]);
-//                                                                } else {
-//                                                                    NSString *encryptedString = [userData hexString];
-//                                                                    encryptedString = [NSString stringFromHex:encryptedString];
-//                                                                    encryptedString = encryptedString? encryptedString : @"";
-//                                                                    [resultChecking setValue:encryptedString forKey:@"encryptedString"];
-//                                                                    callback(@[[NSNull null],  resultChecking]);
-//                                                                }
-//                                                            }];
-//                                                        }
-//                                                    }];
-//                                                }else{
-//                                                    callback(@[[NSNull null],  @"1B PASSWORD NOT MATCH 734"]);
-//                                                }
-//                                            }
-//                                        }];
-//                                    }else{
-//                                       callback(@[[NSNull null],  @"SIGNATURE IS WRONG 739"]);
-//                                    }
-//                                }
-//                            }];
-                        }
+                        NSData *data = [NSData dataWithHexString:@"3C00"];
+                        NSLog(@"input bytes: %@", getHexString(data));
+                        sleep(sleepTime);
+                        [mifareTag sendMiFareCommand:data
+                                   completionHandler:^(NSData *response, NSError *error) {
+                            if (error) {
+                                callback(@[getErrorMessage(error), [NSNull null]]);
+                                [sessionEx invalidateSession];
+                            } else {
+                                NSData *commandReadUserData = [NSData dataWithHexString:@"3A0631"];
+                                sleep(sleepTime);
+                                [mifareTag sendMiFareCommand:commandReadUserData
+                                       completionHandler:^(NSData *userData, NSError *error) {
+                                    if (error) {
+                                        callback(@[[NSNull null],  @"3A0631 ERROR AT 586"]);
+                                        [sessionEx invalidateSession];
+                                    } else {
+                                       NSString *encryptedString = [userData hexString];
+                                       encryptedString = [NSString stringFromHex:encryptedString];
+                                       encryptedString = encryptedString? encryptedString : @"";
+                                       [resultChecking setValue:encryptedString forKey:@"encryptedString"];
+                                       callback(@[[NSNull null],  resultChecking]);
+                                       [sessionEx invalidateSession];
+                                    }
+                                }];
+                            }
+                        }];
                     }
                     return;
                 } else {

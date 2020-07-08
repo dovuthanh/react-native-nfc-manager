@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/layout-v21/notification_template_icon_group.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/layout-v21/notification_template_custom_big.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/layout-v21/notification_template_custom_big.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/layout-v21/notification_action.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_action.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/layout-v21/notification_action.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/layout-v21/notification_action_tombstone.xml"
     },
     {
-        "merged": "/Users/iosdeveloper/forreal-app/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/d2f92218aaa7a3123d01b3e4c2b66c38/res/layout-v21/notification_action_tombstone.xml"
+        "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/layout-v21/notification_template_icon_group.xml"
     }
 ]

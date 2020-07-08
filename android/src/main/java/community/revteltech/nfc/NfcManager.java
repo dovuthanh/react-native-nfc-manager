@@ -1026,10 +1026,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                     @Override
                     public void onTagDiscovered(Tag tag) {
                         manager.tag = tag;
-                        boolean needToUnLock = false;
-                        boolean passwordWasSetup = false;
                         byte[] pwd = hexToByteArray(password);
-                        int sleep_time = 0;
                         int step = 0;
                         String ndfMessage = "";
                         Log.d(LOG_TAG, "readerMode onTagDiscovered");
@@ -1042,8 +1039,31 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                             nfcTag = tag2React(tag);
                         }
                         if (nfcTag != null && udid.isEmpty()) {
-                            sendEvent("NfcManagerDiscoverTag", nfcTag);
-                            nfcAdapter.disableReaderMode(currentActivity);
+                            MifareUltralight isoDep = MifareUltralight.get(tag);
+                            if (isoDep != null) {
+                                //verify signature
+                                try {
+                                    isoDep.connect();
+                                    Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
+                                    // signature ok
+                                    if (valid) {
+                                        //lock prot
+                                        step = 5;
+                                        sendEvent("NfcManagerDiscoverTag", nfcTag);
+                                        nfcAdapter.disableReaderMode(currentActivity);
+                                    } else {
+                                        sendEvent("NfcOriginalCheckError", null);
+                                        nfcAdapter.disableReaderMode(currentActivity);
+                                    }
+                                    isoDep.close();
+                                } catch (IOException e) {
+                                    sendEvent("NfcOriginalCheckError", null);
+                                    nfcAdapter.disableReaderMode(currentActivity);
+                                } finally {
+                                    Log.w(LOG_TAG, "step: " + step);
+                                    nfcAdapter.disableReaderMode(currentActivity);
+                                }
+                            }
                             return;
                         }
                         if(!bytesToHex(tag.getId()).toUpperCase().equals(udid.toUpperCase())){
@@ -1063,54 +1083,23 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                                             (byte) 0x1B, // PWD_AUTH
                                             pwd[0], pwd[1], pwd[2], pwd[3]
                                     });
-//                                    step = 2;
                                     if ((responseCheckPass1 != null) && (responseCheckPass1.length >= 2)) {
-
-//                                        // unlock prot
-//                                        byte[] unlockProt = hexToByteArray("07050000");
-////                                        Thread.sleep(sleep_time);
-//                                        byte[] responseWrite = isoDep.transceive(new byte[]{
-//                                                (byte) 0xA2, // WRITE
-//                                                (byte) 0x84,   // page address
-//                                                unlockProt[0], unlockProt[1], unlockProt[2], unlockProt[3]
-//                                        });
-//                                        step = 3;
-                                        //                                    Thread.sleep(sleep_time);
-                                        //fast read data
                                         final byte[] userData = isoDep.transceive(new byte[]{
                                                 (byte) 0x3A, // READ
                                                 (byte) 0x06,// start page address
                                                 (byte) 0x31// end page address
                                         });
-//                                    Thread.sleep(sleep_time);
                                         step = 4;
                                         ndfMessage = new String(userData, "UTF-8");
-                                        Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
-//                                    byte[] lockProt = hexToByteArray("87050000");
-////                                    Thread.sleep(sleep_time);
-//                                    byte[] responseWrite = isoDep.transceive(new byte[]{
-//                                            (byte) 0xA2, // WRITE
-//                                            (byte) 0x84,   // page address
-//                                            lockProt[0], lockProt[1], lockProt[2], lockProt[3]
-//                                    });
-                                        // signature ok
-                                        if (valid) {
-                                            //lock prot
-                                            step = 5;
-                                            nfcTag.putString("ndfMessage", ndfMessage);
-                                            sendEvent("NfcOriginalChecked", nfcTag);
-                                            nfcAdapter.disableReaderMode(currentActivity);
-                                        } else {
-                                            sendEvent("NfcOriginalCheckError", null);
-                                            nfcAdapter.disableReaderMode(currentActivity);
-                                        }
+                                        nfcTag.putString("ndfMessage", ndfMessage);
+                                        sendEvent("NfcOriginalChecked", nfcTag);
+                                        nfcAdapter.disableReaderMode(currentActivity);
                                     }else{
                                         sendEvent("NfcOriginalCheckError", null);
                                         nfcAdapter.disableReaderMode(currentActivity);
                                     }
 
                                 }else{
-//                                    Thread.sleep(sleep_time);
                                     //fast read data
                                     final byte[] userData = isoDep.transceive(new byte[]{
                                             (byte) 0x3A, // READ
