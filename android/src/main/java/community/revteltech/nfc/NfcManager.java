@@ -1021,7 +1021,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                 }
                 Log.i(LOG_TAG, "enableReaderMode");
                 Bundle readerModeExtras = new Bundle();
-                readerModeExtras.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 100);
+                readerModeExtras.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 10000);
                 nfcAdapter.enableReaderMode(currentActivity, new NfcAdapter.ReaderCallback() {
                     @Override
                     public void onTagDiscovered(Tag tag) {
