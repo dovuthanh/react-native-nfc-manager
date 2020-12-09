@@ -4,7 +4,7 @@
             "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -19,7 +19,7 @@
             "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",

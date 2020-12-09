@@ -1,74 +1,74 @@
 [
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_slide_out_top.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_slide_out_top.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_slide_out_top.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_push_up_out.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_push_up_out.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_push_up_out.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_slide_down.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_slide_down.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_slide_down.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_fade_in.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_fade_in.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_fade_in.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_tooltip_enter.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_tooltip_enter.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_tooltip_enter.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_popup_exit.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_popup_exit.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_popup_exit.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_shrink_fade_out_from_bottom.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_fade_out.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_fade_out.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_fade_out.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_slide_out_bottom.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_slide_out_bottom.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_slide_out_bottom.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_push_up_in.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_push_up_in.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_push_up_in.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_popup_enter.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_popup_enter.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_popup_enter.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_fade_out.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_fade_out.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_fade_out.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_slide_in_top.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_slide_in_top.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_slide_in_top.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_tooltip_exit.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_tooltip_exit.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_tooltip_exit.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_fade_in.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_fade_in.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_fade_in.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/catalyst_slide_up.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/20c3fb57e0bac033f46a62251b262599/jetified-react-native-0.60.3/res/anim/catalyst_slide_up.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/044f004df6f079aaa8d5617400b818dc/jetified-react-native-0.60.3/res/anim/catalyst_slide_up.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_slide_in_bottom.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_slide_in_bottom.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_slide_in_bottom.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/anim/abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/anim/abc_grow_fade_in_from_bottom.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/anim/abc_grow_fade_in_from_bottom.xml"
     }
 ]

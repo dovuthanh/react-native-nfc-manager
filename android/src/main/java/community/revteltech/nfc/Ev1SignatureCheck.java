@@ -21,12 +21,15 @@ import java.util.Arrays;
 
 public class Ev1SignatureCheck {
     private static final String TAG = "Ev1SignatureCheck";
+    public static String signatureNFC = "";
+    public static String message = "";
 
 
     public static Boolean doOriginalityCheck(final MifareUltralight ul, String nxpPubKey) throws IOException {
         final byte[] getSignature = {0x3C, 0x00}; // CMD_READ_SIG
         try {
             final byte[] signature = ul.transceive(getSignature);
+            signatureNFC = Ev1SignatureCheck.ByteArrayToHexString(signature);
             Log.i(TAG, "doOriginalityCheck: " + Ev1SignatureCheck.ByteArrayToHexString(signature));
             Log.i(TAG, "doOriginalityCheck: "+ signature);
             Log.i(TAG, "doOriginalityCheck: "+ ul.getTag().getId());
@@ -34,17 +37,21 @@ public class Ev1SignatureCheck {
             try {
                 valid = checkEcdsaSignature(nxpPubKey, signature, ul.getTag().getId());
             } catch (final NoSuchAlgorithmException e) {
-                Log.i(TAG, "Cannot verify signature (Android has no ECDSA support)\n");
+                message = "Cannot verify signature (Android has no ECDSA support)";
+                Log.i(TAG, "Cannot verify signature (Android has no ECDSA support)");
                 return false;
             }
             if (valid) {
-                Log.i(TAG, "Signature verified with NXP public key\n");
+                Log.i(TAG, "Signature verified with NXP public key");
+                message = "Signature verified with NXP public key)";
                 return true;
             } else {
-                Log.i(TAG, "Signature cannot be verified\n");
+                Log.i(TAG, "Signature cannot be verified");
+                message = "Signature cannot be verified";
                 return false;
             }
         } catch (final IOException e) {
+            message = "tag does not support Read Signature Command";
             Log.i(TAG, "tag does not support Read Signature Command\n");
             return false;
         }

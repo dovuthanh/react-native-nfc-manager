@@ -9,6 +9,7 @@
 #endif
 #import <CoreNFC/CoreNFC.h>
 
+API_AVAILABLE(ios(13.0))
 @interface NfcManager : RCTEventEmitter <RCTBridgeModule, NFCNDEFReaderSessionDelegate, NFCTagReaderSessionDelegate> {
 
 }

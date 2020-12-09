@@ -191,7 +191,6 @@ class NfcManager {
 
         this.cleanUpTagRegistration = true;
       }
-
       return callNative('requestTechnology', [tech, detectPassword]);
     } catch (ex) {
       throw ex;

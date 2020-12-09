@@ -1,26 +1,26 @@
 [
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/abc_list_divider_material.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/drawable-v21/abc_list_divider_material.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/drawable-v21/abc_list_divider_material.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/notification_action_background.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/368950f606a24666cc71526610151cc7/core-1.0.1/res/drawable-v21/notification_action_background.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/e838d0bb7940e6fd3b713381ed7b2ec2/core-1.0.1/res/drawable-v21/notification_action_background.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/abc_dialog_material_background.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/drawable-v21/abc_dialog_material_background.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/drawable-v21/abc_dialog_material_background.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/abc_edit_text_material.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/drawable-v21/abc_edit_text_material.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/drawable-v21/abc_edit_text_material.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/abc_btn_colored_material.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/drawable-v21/abc_btn_colored_material.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/drawable-v21/abc_btn_colored_material.xml"
     },
     {
         "merged": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/drawable-v21/abc_action_bar_item_background_material.xml",
-        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/drawable-v21/abc_action_bar_item_background_material.xml"
+        "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/drawable-v21/abc_action_bar_item_background_material.xml"
     }
 ]

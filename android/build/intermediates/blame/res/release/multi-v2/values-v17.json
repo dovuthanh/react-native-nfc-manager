@@ -4,7 +4,7 @@
             "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-v17/values-v17.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -20,7 +20,7 @@
             "outputFile": "/Users/iosdeveloper/mj-mobile-recheck/node_modules/react-native-nfc-manager/android/build/intermediates/res/merged/release/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/8872009ca8d1e909faa1bd7cac1a2916/appcompat-1.0.2/res/values-v17/values-v17.xml",
+                    "source": "/Users/iosdeveloper/.gradle/caches/transforms-2/files-2.1/9dca0acc5b2d741f86a07daa64392b10/appcompat-1.0.2/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

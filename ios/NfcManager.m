@@ -236,7 +236,7 @@ RCT_EXPORT_MODULE()
                                 pendingCallback(@[getErrorMessage(error)]);
                                 return;
                             }
-                            id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
+                          id<NFCMiFareTag> mifareTag = [sessionEx.connectedTag asNFCMiFareTag];
                           NSData *data = [NSData dataWithHexString:@"3C00"];
                           NSLog(@"input bytes: %@", getHexString(data));
                           [mifareTag sendMiFareCommand:data
@@ -355,6 +355,7 @@ RCT_EXPORT_METHOD(cancelTechnologyRequest:(nonnull RCTResponseSenderBlock)callba
 {
     techRequestTypes = nil;
     techRequestCallback = nil;
+    [sessionEx invalidateSession];
     callback(@[]);
 }
 
@@ -399,6 +400,7 @@ RCT_EXPORT_METHOD(registerTagEventEx:(NSDictionary *)options callback:(nonnull R
             [sessionEx beginSession];
             callback(@[]);
         } else {
+//            [sessionEx beginSession];/\\\
             callback(@[@"Duplicated registration", [NSNull null]]);
         }
     } else {

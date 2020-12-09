@@ -12,6 +12,7 @@ import android.util.Log;
 import android.provider.Settings;
 import com.facebook.react.bridge.*;
 import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
+import com.facebook.react.uimanager.PixelUtil;
 
 import android.app.PendingIntent;
 import android.content.IntentFilter.MalformedMimeTypeException;
@@ -1047,17 +1048,21 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                                     Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
                                     // signature ok
                                     if (valid) {
-                                        //lock prot
                                         step = 5;
                                         sendEvent("NfcManagerDiscoverTag", nfcTag);
                                         nfcAdapter.disableReaderMode(currentActivity);
                                     } else {
-                                        sendEvent("NfcOriginalCheckError", null);
+                                        WritableMap payload = Arguments.createMap();
+                                        payload.putString("signature", Ev1SignatureCheck.signatureNFC);
+                                        payload.putString("messageError", Ev1SignatureCheck.message);
+                                        sendEvent("NfcOriginalCheckError", payload);
                                         nfcAdapter.disableReaderMode(currentActivity);
                                     }
                                     isoDep.close();
                                 } catch (IOException e) {
-                                    sendEvent("NfcOriginalCheckError", null);
+                                    WritableMap payload = Arguments.createMap();
+                                    payload.putString("messageError", e.getMessage());
+                                    sendEvent("NfcOriginalCheckError", payload);
                                     nfcAdapter.disableReaderMode(currentActivity);
                                 } finally {
                                     Log.w(LOG_TAG, "step: " + step);
@@ -1067,7 +1072,9 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                             return;
                         }
                         if(!bytesToHex(tag.getId()).toUpperCase().equals(udid.toUpperCase())){
-                            sendEvent("NfcOriginalCheckError", null);
+                            WritableMap payload = Arguments.createMap();
+                            payload.putString("messageError", bytesToHex(tag.getId()).toUpperCase());
+                            sendEvent("NfcOriginalCheckError", payload);
                             nfcAdapter.disableReaderMode(currentActivity);
                         }
                         MifareUltralight isoDep = MifareUltralight.get(tag);
@@ -1095,7 +1102,9 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
                                         sendEvent("NfcOriginalChecked", nfcTag);
                                         nfcAdapter.disableReaderMode(currentActivity);
                                     }else{
-                                        sendEvent("NfcOriginalCheckError", null);
+                                        WritableMap payload = Arguments.createMap();
+                                        payload.putString("messageError", password);
+                                        sendEvent("NfcOriginalCheckError", payload);
                                         nfcAdapter.disableReaderMode(currentActivity);
                                     }
 
@@ -1109,26 +1118,24 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 //                                    Thread.sleep(sleep_time);
                                     step = 4;
                                     ndfMessage = new String(userData, "UTF-8");
-                                    Boolean valid = Ev1SignatureCheck.doOriginalityCheck(isoDep, publicKey);
-                                    if(valid){
-                                        nfcTag.putString("ndfMessage", ndfMessage);
-                                        sendEvent("NfcOriginalChecked", nfcTag);
-                                        nfcAdapter.disableReaderMode(currentActivity);
-                                    }else{
-                                        sendEvent("NfcOriginalCheckError", null);
-                                        nfcAdapter.disableReaderMode(currentActivity);
-                                    }
+                                    nfcTag.putString("ndfMessage", ndfMessage);
+                                    sendEvent("NfcOriginalChecked", nfcTag);
+                                    nfcAdapter.disableReaderMode(currentActivity);
                                 }
                                 isoDep.close();
                             } catch (IOException e) {
-                                sendEvent("NfcOriginalCheckError", null);
+                                WritableMap payload = Arguments.createMap();
+                                payload.putString("messageError", e.getMessage());
+                                sendEvent("NfcOriginalCheckError", payload);
                                 nfcAdapter.disableReaderMode(currentActivity);
                             }finally {
                                 Log.w(LOG_TAG, "step: " + step);
                                 nfcAdapter.disableReaderMode(currentActivity);
                             }
                         } else {
-                            sendEvent("NfcOriginalCheckError", null);
+                            WritableMap payload = Arguments.createMap();
+                            payload.putString("messageError", "Cannot find device");
+                            sendEvent("NfcOriginalCheckError", payload);
                             nfcAdapter.disableReaderMode(currentActivity);
                         }
                     }
